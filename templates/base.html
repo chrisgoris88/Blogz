@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
     <meta charset="UTF-8">
     <link rel="stylesheet" href ="{{ url_for('static',filename='styles/main.css') }}">
     <title>Build a Blog{% block title %}{% endblock %}</title>
@@ -10,10 +15,20 @@
     <nav>
         <a href="/blog">Main Blog Page</a>
         <a href="/newpost">Add a Blog Entry</a>
+        <a href="/logout">Log out</a>
+        <a href="/login">Log in</a>
+        <a href="/signup">Sign up for a Blog</a>
     </nav>
 
-    {% block content %}
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        <ul>
+        {% for category,message in messages %}
+            <li class="{{category}}">{{message}}</li>
+        {% endfor %}
+        </ul>
+    {% endwith %}
 
+    {% block content %}
     {% endblock %}
     
 </body>

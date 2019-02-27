@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2>Blog Posts by {{author}}</h2>
+
+    {% if blogs|length == 0 %}
+    <p>{{author}} has no posts yet</p>
+    
+    {% else %}
+
+        {% for blog in blogs %}
+            <a href="./blog?id={{blog.id}}">
+                <h3>{{blog.title}}</h3>
+            </a>
+            <p>{{blog.body}}</p>
+            <p class="blog_author">Written by
+                <a href="./blog?user={{author}}">{{author}}</a>
+            </p>
+            <hr />
+        {% endif %}
+    {% endblock %}
